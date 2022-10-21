@@ -12,6 +12,7 @@ export function Input({
   ...props
 }) {
   const [isFocused, setIsFocused] = useState(false);
+  const [hidePassword, setHidePassword] = useState(password);
 
   return (
     <View>
@@ -38,7 +39,16 @@ export function Input({
           onBLur={() => {
             setIsFocused(false);
           }}
+          secureTextEntry={hidePassword}
         />
+        {password && (
+          <Feather
+            style={{ color: "#7978B5", padding: 5 }}
+            name={hidePassword ? "eye" : "eye-off"}
+            size={22}
+            onPress={() => setHidePassword(!hidePassword)}
+          />
+        )}
       </View>
       {error && <Text style={styles.erro}>{error}</Text>}
     </View>

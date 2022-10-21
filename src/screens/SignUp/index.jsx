@@ -18,6 +18,12 @@ export function SignUp() {
             iconName="mail"
             placeholder="Entre com seu email"
           />
+          <Input
+            label="Senha"
+            iconName="lock"
+            placeholder="Entre com sua senha"
+            password
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
