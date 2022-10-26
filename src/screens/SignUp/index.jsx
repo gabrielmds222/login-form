@@ -5,6 +5,8 @@ import styles from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
+import { useForm } from "react-hook-form";
+
 export function SignUp() {
   return (
     <SafeAreaView style={styles.container}>
