@@ -8,7 +8,11 @@ import { Button } from "../../components/Button";
 import { useForm, Controller } from "react-hook-form";
 
 export function SignUp() {
-  const { control } = useForm();
+  const { control, handleSubmit } = useForm();
+
+  function handleSignUp(data) {
+    console.log(data);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,6 +42,7 @@ export function SignUp() {
                 label="Email"
                 iconName="mail"
                 placeholder="Entre com seu email"
+                onChangeText={onChange}
               />
             )}
           />
@@ -50,23 +55,25 @@ export function SignUp() {
                 iconName="lock"
                 placeholder="Entre com sua senha"
                 password
+                onChangeText={onChange}
               />
             )}
           />
           <Controller
             control={control}
-            name="confirmPassword"
+            name="password_confirm"
             render={({ field: { onChange } }) => (
               <Input
                 label="Confirme a senha"
                 iconName="lock"
                 placeholder="Confirme a senha"
                 password
+                onChangeText={onChange}
               />
             )}
           />
 
-          <Button title="Cadastro" />
+          <Button title="Cadastro" onPress={handleSubmit(handleSignUp)} />
           <Text
             style={{
               color: "#000",
