@@ -8,7 +8,18 @@ import { Button } from "../../components/Button";
 import { useForm, Controller } from "react-hook-form";
 
 export function SignUp() {
-  const { control, handleSubmit } = useForm();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      Nome: "",
+      Email: "",
+      Senha: "",
+      ConfirmaSenha: "",
+    },
+  });
 
   function handleSignUp(data) {
     console.log(data);
@@ -24,7 +35,8 @@ export function SignUp() {
         <View style={{ marginVertical: 20 }}>
           <Controller
             control={control}
-            name="name"
+            name="Nome"
+            rules={{ required: true }}
             render={({ field: { onChange } }) => (
               <Input
                 label="Nome completo"
@@ -34,6 +46,7 @@ export function SignUp() {
               />
             )}
           />
+          {errors.Nome && <Text>Informe o nome</Text>}
           <Controller
             control={control}
             name="email"
