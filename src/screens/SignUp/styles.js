@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginVertical: 10,
   },
+  erro: {
+    color: "red",
+    fontSize: 12,
+    marginTop: 7,
+  },
 });
 
 export default styles;

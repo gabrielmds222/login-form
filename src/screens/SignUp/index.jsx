@@ -6,6 +6,23 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
 import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup
+  .object({
+    Nome: yup.string().required("Campo nome é obrigatório"),
+    Email: yup
+      .string()
+      .required("Email é obrigatório")
+      .email("Informe um email válido"),
+    Password: yup.string().required("Senha é obrigatória"),
+    Password_confirm: yup
+      .string()
+      .required("Confirmar a senha é obrigatório")
+      .oneOf([yup.ref("Password"), null], "As senhas não são iguais"),
+  })
+  .required();
 
 export function SignUp() {
   const {
@@ -13,12 +30,7 @@ export function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      Nome: "",
-      Email: "",
-      Senha: "",
-      ConfirmaSenha: "",
-    },
+    resolver: yupResolver(schema),
   });
 
   function handleSignUp(data) {
@@ -36,32 +48,36 @@ export function SignUp() {
           <Controller
             control={control}
             name="Nome"
-            rules={{ required: true }}
             render={({ field: { onChange } }) => (
               <Input
                 label="Nome completo"
                 iconName="user"
                 placeholder="Digite seu nome"
                 onChangeText={onChange}
+                // errorMessage={errors.Nome && "Informe o nome"}
               />
             )}
           />
-          {errors.Nome && <Text>Informe o nome</Text>}
+          <Text style={styles.erro}>{errors.Nome?.message}</Text>
+          {/* {errors.Nome && <Text>Informe o nome</Text>} */}
           <Controller
             control={control}
-            name="email"
+            name="Email"
             render={({ field: { onChange } }) => (
               <Input
                 label="Email"
                 iconName="mail"
                 placeholder="Entre com seu email"
                 onChangeText={onChange}
+                // errorMessage={errors.Nome && "Informe o nome"}
               />
             )}
           />
+          <Text style={styles.erro}>{errors.Email?.message}</Text>
+
           <Controller
             control={control}
-            name="password"
+            name="Password"
             render={({ field: { onChange } }) => (
               <Input
                 label="Senha"
@@ -69,12 +85,15 @@ export function SignUp() {
                 placeholder="Entre com sua senha"
                 password
                 onChangeText={onChange}
+                // errorMessage={errors.Nome && "Informe o nome"}
               />
             )}
           />
+          <Text style={styles.erro}>{errors.Password?.message}</Text>
+
           <Controller
             control={control}
-            name="password_confirm"
+            name="Password_confirm"
             render={({ field: { onChange } }) => (
               <Input
                 label="Confirme a senha"
@@ -82,9 +101,11 @@ export function SignUp() {
                 placeholder="Confirme a senha"
                 password
                 onChangeText={onChange}
+                // errorMessage={errors.Nome && "Informe o nome"}
               />
             )}
           />
+          <Text style={styles.erro}>{errors.Password_confirm?.message}</Text>
 
           <Button title="Cadastro" onPress={handleSubmit(handleSignUp)} />
           <Text

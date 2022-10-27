@@ -6,7 +6,7 @@ import { Feather } from "@expo/vector-icons";
 export function Input({
   label,
   iconName,
-  error,
+  errorMessage,
   password,
   onFocus = () => {},
   ...props
@@ -20,7 +20,13 @@ export function Input({
       <View
         style={[
           styles.inputContainer,
-          { borderColor: error ? "red" : isFocused ? "#7978B5" : "#F3F4FB" },
+          {
+            borderColor: errorMessage
+              ? "red"
+              : isFocused
+              ? "#7978B5"
+              : "#F3F4FB",
+          },
         ]}
       >
         <Feather
@@ -50,7 +56,7 @@ export function Input({
           />
         )}
       </View>
-      {error && <Text style={styles.erro}>{error}</Text>}
+      {errorMessage && <Text style={styles.erro}>{errorMessage}</Text>}
     </View>
   );
 }
