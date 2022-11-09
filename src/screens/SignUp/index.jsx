@@ -4,6 +4,7 @@ import { View, SafeAreaView, ScrollView, Text } from "react-native";
 import styles from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { Dropdown } from "../../components/Dropdown";
 
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -54,12 +55,11 @@ export function SignUp() {
                 iconName="user"
                 placeholder="Digite seu nome"
                 onChangeText={onChange}
-                // errorMessage={errors.Nome && "Informe o nome"}
               />
             )}
           />
           <Text style={styles.erro}>{errors.Nome?.message}</Text>
-          {/* {errors.Nome && <Text>Informe o nome</Text>} */}
+
           <Controller
             control={control}
             name="Email"
@@ -69,11 +69,12 @@ export function SignUp() {
                 iconName="mail"
                 placeholder="Entre com seu email"
                 onChangeText={onChange}
-                // errorMessage={errors.Nome && "Informe o nome"}
               />
             )}
           />
           <Text style={styles.erro}>{errors.Email?.message}</Text>
+
+          <Dropdown />
 
           <Controller
             control={control}
@@ -85,7 +86,6 @@ export function SignUp() {
                 placeholder="Entre com sua senha"
                 password
                 onChangeText={onChange}
-                // errorMessage={errors.Nome && "Informe o nome"}
               />
             )}
           />
@@ -101,7 +101,6 @@ export function SignUp() {
                 placeholder="Confirme a senha"
                 password
                 onChangeText={onChange}
-                // errorMessage={errors.Nome && "Informe o nome"}
               />
             )}
           />
